@@ -17,7 +17,7 @@ public final class UserFactory {
     public static UserDetails create(User user) {
         return new UserPrincipal(
                 user.getId(),
-                user.getEmail(),
+                user.getLogin(),
                 user.getPassword(),
                 user.getRole(),
                 mapToGrantedAuthorities(user.getRole())
