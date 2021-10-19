@@ -14,14 +14,14 @@ public class UserPrincipal implements UserDetails {
 
     public UserPrincipal(
             Long id,
-            String email,
+            String login,
             String password,
             Role role,
             Collection<? extends GrantedAuthority> authorities
     ) {
         this.user = User.builder()
                 .id(id)
-                .email(email)
+                .login(login)
                 .password(password)
                 .role(role)
                 .build();
@@ -40,7 +40,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.user.getEmail();
+        return this.user.getLogin();
     }
 
     @Override

@@ -1,0 +1,1 @@
+ALTER TABLE Car ADD CONSTRAINT `FK_RLS` FOREIGN KEY (`login`) REFERENCES `User` (`login`);
