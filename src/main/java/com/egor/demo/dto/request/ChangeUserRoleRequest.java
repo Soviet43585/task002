@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 @Data
 public class ChangeUserRoleRequest {
 
+    private Long id;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 }
