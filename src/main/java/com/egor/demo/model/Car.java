@@ -24,8 +24,8 @@ public class Car {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "user", nullable = false)
-    private String username;
+    @Column(name = "login", nullable = false)
+    private String login;
 
     @Column(name = "description", nullable = false)
     private String description;
