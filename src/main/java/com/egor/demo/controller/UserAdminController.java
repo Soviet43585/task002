@@ -1,12 +1,11 @@
 package com.egor.demo.controller;
 
 import com.egor.demo.dto.request.ChangeUserRoleRequest;
+import com.egor.demo.dto.response.UserAdminResponse;
 import com.egor.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,4 +21,8 @@ public class UserAdminController {
 
     }
 
+    @GetMapping("/all")
+    public List<UserAdminResponse> all() {
+        return userService.findAllUsers();
+    }
 }
