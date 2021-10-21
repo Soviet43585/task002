@@ -7,5 +7,4 @@ public interface CarService {
 
     void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest);
 
-
 }

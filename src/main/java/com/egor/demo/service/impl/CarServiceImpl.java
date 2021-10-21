@@ -8,7 +8,6 @@ import com.egor.demo.repository.CarRepository;
 import com.egor.demo.security.UserPrincipal;
 import com.egor.demo.service.CarService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -17,7 +16,6 @@ public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
     private final CarDtoToEntityMapper carDtoToEntityMapper;
-    private final ModelMapper modelMapper;
 
     @Override
     public void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest) {

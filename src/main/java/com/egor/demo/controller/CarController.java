@@ -21,5 +21,4 @@ public class CarController {
     public void add(@AuthenticationPrincipal UserPrincipal user, @RequestBody CreateCarRequest createCarRequest) {
         carService.create(user, createCarRequest);
     }
-
 }
