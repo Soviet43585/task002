@@ -4,7 +4,7 @@ CREATE TABLE `Car`
  `model`    nvarchar(50) NOT NULL UNIQUE ,
  `type` nvarchar(100) NOT NULL ,
  `price` double NOT NULL ,
- `login` nvarchar(50) NOT NULL ,
+ `user_id` int NOT NULL ,
  `description` nvarchar(1000) NOT NULL ,
 
 PRIMARY KEY auto_increment(`id`),

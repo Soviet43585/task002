@@ -20,7 +20,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest) {
         Car newCar = carDtoToEntityMapper.carDtoToEntity(createCarRequest);
-        newCar.setLogin(userPrincipal.getUsername());
+        newCar.setUserId(userPrincipal.getId());
         carRepository.save(newCar);
     }
 }

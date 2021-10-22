@@ -20,4 +20,12 @@ public class ChangeUserRoleRequest {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
