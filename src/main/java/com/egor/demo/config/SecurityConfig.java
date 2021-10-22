@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserPrincipalDetailsService userPrincipalDetailsService;
 
-    private static final String ADMIN_ENDPOINTS = "/api/admin/**";
+    private static final String ADMIN_ENDPOINTS = "/admin/**";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
