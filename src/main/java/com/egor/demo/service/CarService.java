@@ -16,4 +16,6 @@ public interface CarService {
 
     void update(UserPrincipal userPrincipal, Long id, CreateCarRequest createCarRequest);
 
+    void delete(UserPrincipal userPrincipal, Long id);
+
 }

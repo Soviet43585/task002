@@ -37,4 +37,9 @@ public class CarController {
         carService.update(user, id, createCarRequest);
     }
 
+    @PatchMapping("/auth/{id}")
+    public void delete(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id) {
+        carService.delete(user, id);
+    }
+
 }

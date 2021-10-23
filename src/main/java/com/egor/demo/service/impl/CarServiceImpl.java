@@ -66,4 +66,20 @@ public class CarServiceImpl implements CarService {
             }
         }
     }
+
+    @Override
+    public void delete(UserPrincipal userPrincipal, Long id) {
+        List<Car> cars = carRepository.findAllByUserId(userPrincipal.getId());
+        if(cars == null) {
+            throw new EntityNotFoundException("User have not cars");
+        }
+        else {
+            for(Car car : cars) {
+                if (car.getId() == id) {
+                    car.setActive(false);
+                    carRepository.save(car);
+                }
+            }
+        }
+    }
 }

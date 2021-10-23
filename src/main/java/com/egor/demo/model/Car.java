@@ -1,6 +1,7 @@
 package com.egor.demo.model;
 
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@Where(clause = "is_active = 1")
 public class Car {
 
     @Id
@@ -28,6 +30,9 @@ public class Car {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "is_active")
+    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -87,5 +92,13 @@ public class Car {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
