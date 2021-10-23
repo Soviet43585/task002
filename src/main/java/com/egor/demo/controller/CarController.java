@@ -24,12 +24,17 @@ public class CarController {
 
     @GetMapping("/auth/mysales")
     public List<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user) {
-        return carService.getAllById(user.getId());
+        return carService.getAllByUserId(user.getId());
     }
 
-    @PostMapping
+    @PostMapping("/auth")
     public void add(@AuthenticationPrincipal UserPrincipal user, @RequestBody CreateCarRequest createCarRequest) {
         carService.create(user, createCarRequest);
+    }
+
+    @PutMapping("/auth/{id}")
+    public void update(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id, @RequestBody CreateCarRequest createCarRequest) {
+        carService.update(user, id, createCarRequest);
     }
 
 }

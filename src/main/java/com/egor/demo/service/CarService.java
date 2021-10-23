@@ -8,10 +8,12 @@ import java.util.List;
 
 public interface CarService {
 
-    List<CarResponse> getAllById(Long id);
+    List<CarResponse> getAllByUserId(Long id);
 
     List<CarResponse> getAll();
 
     void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest);
+
+    void update(UserPrincipal userPrincipal, Long id, CreateCarRequest createCarRequest);
 
 }

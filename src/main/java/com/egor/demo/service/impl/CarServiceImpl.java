@@ -10,7 +10,7 @@ import com.egor.demo.security.UserPrincipal;
 import com.egor.demo.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class CarServiceImpl implements CarService {
     private final CarDtoToEntityMapper carDtoToEntityMapper;
 
     @Override
-    public List<CarResponse> getAllById(Long id) {
+    public List<CarResponse> getAllByUserId(Long id) {
         List<Car> list = carRepository.findAllByUserId(id);
         List<CarResponse> newCar = new ArrayList<>();
         for(Car car : list) {
@@ -46,5 +46,24 @@ public class CarServiceImpl implements CarService {
         Car newCar = carDtoToEntityMapper.carDtoToEntity(createCarRequest);
         newCar.setUserId(userPrincipal.getId());
         carRepository.save(newCar);
+    }
+
+    @Override
+    public void update(UserPrincipal userPrincipal, Long id, CreateCarRequest createCarRequest) {
+        List<Car> cars = carRepository.findAllByUserId(userPrincipal.getId());
+        if(cars == null) {
+            throw new EntityNotFoundException("User have not cars");
+        }
+        else {
+            for(Car car : cars) {
+                if (car.getId() == id) {
+                    car.setModel(createCarRequest.getModel());
+                    car.setType(createCarRequest.getType());
+                    car.setPrice(createCarRequest.getPrice());
+                    car.setDescription(createCarRequest.getDescription());
+                    carRepository.save(car);
+                }
+            }
+        }
     }
 }

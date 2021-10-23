@@ -1,7 +1,5 @@
 package com.egor.demo.dto.request;
 
-import lombok.Data;
-
 
 public class CreateCarRequest {
 
