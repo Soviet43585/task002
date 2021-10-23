@@ -1,7 +1,6 @@
-package com.egor.demo.dto.request;
+package com.egor.demo.dto.response;
 
-
-public class CreateCarRequest {
+public class CarResponse {
 
     private Long id;
 
@@ -9,9 +8,7 @@ public class CreateCarRequest {
 
     private String type;
 
-    private Double price;
-
-    private String description;
+    private String price;
 
     public Long getId() {
         return id;
@@ -37,19 +34,11 @@ public class CreateCarRequest {
         this.type = type;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
