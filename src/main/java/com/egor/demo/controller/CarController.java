@@ -2,13 +2,14 @@ package com.egor.demo.controller;
 
 import com.egor.demo.dto.request.CreateCarRequest;
 import com.egor.demo.dto.response.CarResponse;
+import com.egor.demo.dto.response.DetailCarResponse;
 import com.egor.demo.security.UserPrincipal;
 import com.egor.demo.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,14 +18,19 @@ public class CarController {
 
     private final CarService carService;
 
+    @GetMapping("/{id}")
+    public DetailCarResponse more(@PathVariable Long id) {
+        return carService.getCarById(id);
+    }
+
     @GetMapping("/all")
-    private List<CarResponse> getAll() {
-        return carService.getAll();
+    public Page<CarResponse> getAll(Pageable pageable) {
+        return carService.getAll(pageable);
     }
 
     @GetMapping("/auth/mysales")
-    public List<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user) {
-        return carService.getAllByUserId(user.getId());
+    public Page<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user, Pageable pageable) {
+        return carService.getAllByUserId(user.getId(), pageable);
     }
 
     @PostMapping("/auth")

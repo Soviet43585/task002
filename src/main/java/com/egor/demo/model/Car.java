@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 3, message = "Model should be between 3 and more characters")
     @Column(name = "model", nullable = false)
     private String model;
 
@@ -32,7 +34,7 @@ public class Car {
     private String description;
 
     @Column(name = "is_active")
-    private Boolean active;
+    private Boolean active = true;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)

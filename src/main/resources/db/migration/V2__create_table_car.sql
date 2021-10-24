@@ -1,7 +1,7 @@
 CREATE TABLE `Car`
 (
  `id`       int NOT NULL AUTO_INCREMENT ,
- `model`    nvarchar(50) NOT NULL UNIQUE ,
+ `model`    nvarchar(50) NOT NULL ,
  `type` nvarchar(100) NOT NULL ,
  `price` double NOT NULL ,
  `user_id` int NOT NULL ,
