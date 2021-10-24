@@ -3,7 +3,9 @@ package com.egor.demo.service.impl;
 
 import com.egor.demo.dto.request.CreateCarRequest;
 import com.egor.demo.dto.response.CarResponse;
+import com.egor.demo.dto.response.DetailCarResponse;
 import com.egor.demo.mapper.CarDtoToEntityMapper;
+import com.egor.demo.mapper.DetailCarMapper;
 import com.egor.demo.model.Car;
 import com.egor.demo.repository.CarRepository;
 import com.egor.demo.security.UserPrincipal;
@@ -24,6 +26,13 @@ public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
     private final CarDtoToEntityMapper carDtoToEntityMapper;
+    private final DetailCarMapper detailCarMapper;
+
+    @Override
+    public DetailCarResponse getCarById(Long id) {
+        Car car = carRepository.getById(id);
+        return detailCarMapper.carEntityToDetailDto(car);
+    }
 
     @Override
     public Page<CarResponse> getAllByUserId(Long id, Pageable pageable) {

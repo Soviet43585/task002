@@ -2,6 +2,7 @@ package com.egor.demo.controller;
 
 import com.egor.demo.dto.request.CreateCarRequest;
 import com.egor.demo.dto.response.CarResponse;
+import com.egor.demo.dto.response.DetailCarResponse;
 import com.egor.demo.security.UserPrincipal;
 import com.egor.demo.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,13 @@ public class CarController {
 
     private final CarService carService;
 
+    @GetMapping("/{id}")
+    public DetailCarResponse more(@PathVariable Long id) {
+        return carService.getCarById(id);
+    }
+
     @GetMapping("/all")
-    private Page<CarResponse> getAll(Pageable pageable) {
+    public Page<CarResponse> getAll(Pageable pageable) {
         return carService.getAll(pageable);
     }
 

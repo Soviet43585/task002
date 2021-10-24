@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 3, message = "Model should be between 3 and more characters")
     @Column(name = "model", nullable = false)
     private String model;
 
