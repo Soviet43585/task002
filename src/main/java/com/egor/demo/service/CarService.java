@@ -3,12 +3,14 @@ package com.egor.demo.service;
 import com.egor.demo.dto.request.CreateCarRequest;
 import com.egor.demo.dto.response.CarResponse;
 import com.egor.demo.security.UserPrincipal;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface CarService {
 
-    List<CarResponse> getAllByUserId(Long id);
+    Page<CarResponse> getAllByUserId(Long id, Pageable pageable);
 
     List<CarResponse> getAll();
 

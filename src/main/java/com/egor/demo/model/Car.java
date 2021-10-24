@@ -32,7 +32,7 @@ public class Car {
     private String description;
 
     @Column(name = "is_active")
-    private Boolean active;
+    private Boolean active = true;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)

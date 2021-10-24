@@ -9,10 +9,14 @@ import com.egor.demo.repository.CarRepository;
 import com.egor.demo.security.UserPrincipal;
 import com.egor.demo.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -22,13 +26,10 @@ public class CarServiceImpl implements CarService {
     private final CarDtoToEntityMapper carDtoToEntityMapper;
 
     @Override
-    public List<CarResponse> getAllByUserId(Long id) {
-        List<Car> list = carRepository.findAllByUserId(id);
-        List<CarResponse> newCar = new ArrayList<>();
-        for(Car car : list) {
-            newCar.add(carDtoToEntityMapper.carEntityToDto(car));
-        }
-        return newCar;
+    public Page<CarResponse> getAllByUserId(Long id, Pageable pageable) {
+        List<CarResponse> list = new ArrayList<>();
+        list = carRepository.findAllByUserId(id, pageable).stream().map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        return new PageImpl<>(list);
     }
 
     @Override
