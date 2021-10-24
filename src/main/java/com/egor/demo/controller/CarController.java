@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +18,8 @@ public class CarController {
     private final CarService carService;
 
     @GetMapping("/all")
-    private List<CarResponse> getAll() {
-        return carService.getAll();
+    private Page<CarResponse> getAll(Pageable pageable) {
+        return carService.getAll(pageable);
     }
 
     @GetMapping("/auth/mysales")

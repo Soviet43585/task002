@@ -12,7 +12,7 @@ public interface CarService {
 
     Page<CarResponse> getAllByUserId(Long id, Pageable pageable);
 
-    List<CarResponse> getAll();
+    Page<CarResponse> getAll(Pageable pageable);
 
     void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest);
 

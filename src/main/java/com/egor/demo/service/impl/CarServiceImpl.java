@@ -33,13 +33,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarResponse> getAll() {
-        List<Car> list = carRepository.findAll();
-        List<CarResponse> newCar = new ArrayList<>();
-        for(Car car : list) {
-            newCar.add(carDtoToEntityMapper.carEntityToDto(car));
-        }
-        return newCar;
+    public Page<CarResponse> getAll(Pageable pageable) {
+        List<CarResponse> list = new ArrayList<>();
+        list = carRepository.findAll(pageable).stream().map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        return new PageImpl<>(list);
     }
 
     @Override
