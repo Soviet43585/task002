@@ -49,35 +49,38 @@ public class CarServiceImpl implements CarService {
     @Override
     public void update(UserPrincipal userPrincipal, Long id, CreateCarRequest createCarRequest) {
         List<Car> cars = carRepository.findAllByUserId(userPrincipal.getId());
-        if(cars == null) {
-            throw new EntityNotFoundException("User have not cars");
+        if(!isUserOwner(cars, id)) {
+            throw new EntityNotFoundException("You can't update this sale. You is not owner.");
         }
         else {
-            for(Car car : cars) {
-                if (car.getId() == id) {
-                    car.setModel(createCarRequest.getModel());
-                    car.setType(createCarRequest.getType());
-                    car.setPrice(createCarRequest.getPrice());
-                    car.setDescription(createCarRequest.getDescription());
-                    carRepository.save(car);
-                }
-            }
+            Car car = carRepository.findById(id).orElseThrow(
+                    () -> new EntityNotFoundException("Not Found")
+            );
+            car.setModel(createCarRequest.getModel());
+            car.setType(createCarRequest.getType());
+            car.setPrice(createCarRequest.getPrice());
+            car.setDescription(createCarRequest.getDescription());
+            carRepository.save(car);
         }
     }
 
     @Override
     public void delete(UserPrincipal userPrincipal, Long id) {
         List<Car> cars = carRepository.findAllByUserId(userPrincipal.getId());
-        if(cars == null) {
-            throw new EntityNotFoundException("User have not cars");
+        if(!isUserOwner(cars, id)) {
+            throw new EntityNotFoundException("You can't update this sale. You is not owner.");
         }
         else {
-            for(Car car : cars) {
-                if (car.getId() == id) {
-                    car.setActive(false);
-                    carRepository.save(car);
-                }
-            }
+            Car car = carRepository.findById(id).orElseThrow(
+                    () -> new EntityNotFoundException("Not Found")
+            );
+            car.setActive(false);
+            carRepository.save(car);
         }
+    }
+
+    @Override
+    public Boolean isUserOwner(List<Car> cars, Long id) {
+        return cars.stream().anyMatch(s -> s.getId().equals(id));
     }
 }
