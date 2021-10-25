@@ -52,6 +52,7 @@ public class CarServiceImpl implements CarService {
     public void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest) {
         Car newCar = carDtoToEntityMapper.carDtoToEntity(createCarRequest);
         newCar.setUserId(userPrincipal.getId());
+        newCar.setActive(true);
         carRepository.save(newCar);
     }
 
