@@ -13,37 +13,54 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/car")
+@RequestMapping("/api")
 public class CarController {
 
     private final CarService carService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/car/{id}")
     public DetailCarResponse more(@PathVariable Long id) {
         return carService.getCarById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/car/all")
     public Page<CarResponse> getAll(Pageable pageable) {
         return carService.getAll(pageable);
     }
 
-    @GetMapping("/auth/mysales")
+    @GetMapping("/car/sort/byType")
+    public Page<CarResponse> getAllAndSortByType(Pageable pageable) {
+        return carService.getAllAndSortByType(pageable);
+    }
+
+    @GetMapping("/car/sort/byPrice")
+    public Page<CarResponse> getAllAndSortByPrice(Pageable pageable) {
+        return carService.getAllAndSortByPrice(pageable);
+    }
+
+    @GetMapping("/car/filter/{type}")
+    public Page<CarResponse> filterByType(@PathVariable String type, Pageable pageable) {
+        return carService.getAllByType(type, pageable);
+    }
+
+
+
+    @GetMapping("/user/mySales")
     public Page<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user, Pageable pageable) {
         return carService.getAllByUserId(user.getId(), pageable);
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/user")
     public void add(@AuthenticationPrincipal UserPrincipal user, @RequestBody CreateCarRequest createCarRequest) {
         carService.create(user, createCarRequest);
     }
 
-    @PutMapping("/auth/{id}")
+    @PutMapping("/user/{id}")
     public void update(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id, @RequestBody CreateCarRequest createCarRequest) {
         carService.update(user, id, createCarRequest);
     }
 
-    @PatchMapping("/auth/{id}")
+    @PatchMapping("/user/{id}")
     public void delete(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id) {
         carService.delete(user, id);
     }

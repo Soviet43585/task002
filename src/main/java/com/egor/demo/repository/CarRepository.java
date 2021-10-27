@@ -13,7 +13,13 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     Page<Car> findAll(Pageable pageable);
 
+    Page<Car> findByOrderByTypeAsc(Pageable pageable);
+
+    Page<Car> findByOrderByPriceAsc(Pageable pageable);
+
     Page<Car> findAllByUserId(Long userId, Pageable pageable);
 
     List<Car> findAllByUserId(Long userId);
+
+    Page<Car> findAllByType(String type, Pageable pageable);
 }

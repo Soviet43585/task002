@@ -14,6 +14,10 @@ public interface CarService {
 
     DetailCarResponse getCarById(Long id);
 
+    Page<CarResponse> getAllAndSortByType(Pageable pageable);
+
+    Page<CarResponse> getAllAndSortByPrice(Pageable pageable);
+
     Page<CarResponse> getAllByUserId(Long id, Pageable pageable);
 
     Page<CarResponse> getAll(Pageable pageable);
@@ -26,4 +30,5 @@ public interface CarService {
 
     Boolean isUserOwner(List<Car> cars, Long id); //method check user request for update and delete him sales (is user owner this sale)
 
+    Page<CarResponse> getAllByType(String type, Pageable pageable);
 }
