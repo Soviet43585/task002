@@ -1,0 +1,12 @@
+insert into car (model, type, price, user_id, description) values ('MAZ 5551', 'Cargo', 15000, 1, 'Medium dump truck');
+insert into car (model, type, price, user_id, description) values ('MAZ 4571N2', 'Cargo', 18000, 3, 'Light agricultural dump truck');
+insert into car (model, type, price, user_id, description) values ('VAZ 2101', 'Light', 800, 2, 'Light red bucket');
+insert into car (model, type, price, user_id, description) values ('Minsk C250', 'Moto', 15000, 2, 'Tighten the bolts after purchase');
+insert into car (model, type, price, user_id, description) values ('MAZ 205', 'Bus', 50000, 3, 'Some description 1');
+insert into car (model, type, price, user_id, description) values ('Volkswagen Jetta 2', 'Light', 1500, 1, 'Dream car');
+insert into car (model, type, price, user_id, description) values ('Magic carpet', 'Moto', 150000, 3, 'Сarpet from the wall');
+insert into car (model, type, price, user_id, description) values ('Some bus', 'Bus', 43000, 1, 'Some description 2');
+insert into car (model, type, price, user_id, description) values ('MAZ 5915', 'Cargo', 25400, 2, 'Some description 3');
+insert into car (model, type, price, user_id, description) values ('GAZ 3307', 'Cargo', 7000, 3, 'Backet with bolts');
+insert into car (model, type, price, user_id, description) values ('GAZ 69', 'Light', 3000, 1, 'Old military car');
+insert into car (model, type, price, user_id, description) values ('MAZ 5551', 'Cargo', 15000, 1, 'Medium dump truck');

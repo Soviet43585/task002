@@ -44,7 +44,6 @@ public class CarController {
     }
 
 
-
     @GetMapping("/user/mySales")
     public Page<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user, Pageable pageable) {
         return carService.getAllByUserId(user.getId(), pageable);
