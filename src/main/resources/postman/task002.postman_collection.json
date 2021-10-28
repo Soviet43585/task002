@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "f777890c-9748-49ad-b6ac-b9518bc39585",
-		"name": "New Collection",
+		"name": "task002",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -322,6 +322,15 @@
 						"setRole"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterByPrice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
 			},
 			"response": []
 		}

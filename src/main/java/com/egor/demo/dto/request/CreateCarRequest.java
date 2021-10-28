@@ -1,16 +1,24 @@
 package com.egor.demo.dto.request;
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Pattern;
+
 public class CreateCarRequest {
 
     private Long id;
 
+    @NotBlank(message = "Model should not be empty")
     private String model;
 
+    @NotBlank(message = "Type should not be empty")
+    @Pattern(regexp = "^(Cargo|Bus|Light|Moto)$", message = "Type can be only: Cargo, Bus, Light, Moto")
     private String type;
 
     private Double price;
 
+    @NotBlank(message = "Description should not be empty")
     private String description;
 
     public Long getId() {

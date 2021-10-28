@@ -16,9 +16,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -82,15 +86,22 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest) {
+    public String create(UserPrincipal userPrincipal, @Valid CreateCarRequest createCarRequest, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
         Car newCar = carDtoToEntityMapper.carDtoToEntity(createCarRequest);
         newCar.setUserId(userPrincipal.getId());
         newCar.setActive(true);
         carRepository.save(newCar);
+        return "Ok";
     }
 
     @Override
-    public void update(UserPrincipal userPrincipal, Long id, CreateCarRequest createCarRequest) {
+    public String update(UserPrincipal userPrincipal, Long id, CreateCarRequest createCarRequest, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
         List<Car> cars = carRepository.findAllByUserId(userPrincipal.getId());
         if(!isUserOwner(cars, id)) {
             throw new EntityNotFoundException("You can't update this sale. You is not owner.");
@@ -104,6 +115,7 @@ public class CarServiceImpl implements CarService {
             car.setPrice(createCarRequest.getPrice());
             car.setDescription(createCarRequest.getDescription());
             carRepository.save(car);
+            return "Ok";
         }
     }
 

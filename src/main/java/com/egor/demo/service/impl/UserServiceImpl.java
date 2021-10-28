@@ -11,6 +11,7 @@ import com.egor.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -43,11 +44,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(CreateUserRequest createUserRequest) {
+    public String registerUser(CreateUserRequest createUserRequest, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
         User newUser = userDtoToEntityMapper.userDtoToEntity(createUserRequest);
         newUser.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
         newUser.setRole(Role.ROLE_USER);
         userRepository.save(newUser);
+        return "Ok";
     }
 
 }

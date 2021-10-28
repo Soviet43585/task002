@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -55,13 +58,13 @@ public class CarController {
     }
 
     @PostMapping("/user")
-    public void add(@AuthenticationPrincipal UserPrincipal user, @RequestBody CreateCarRequest createCarRequest) {
-        carService.create(user, createCarRequest);
+    public String add(@AuthenticationPrincipal UserPrincipal user, @Valid @RequestBody CreateCarRequest createCarRequest, BindingResult bindingResult) {
+        return carService.create(user, createCarRequest, bindingResult);
     }
 
     @PutMapping("/user/{id}")
-    public void update(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id, @RequestBody CreateCarRequest createCarRequest) {
-        carService.update(user, id, createCarRequest);
+    public String update(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id,@Valid @RequestBody CreateCarRequest createCarRequest, BindingResult bindingResult) {
+        return carService.update(user, id, createCarRequest, bindingResult);
     }
 
     @PatchMapping("/user/{id}")
