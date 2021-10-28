@@ -21,7 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserPrincipalDetailsService userPrincipalDetailsService;
 
+    private static final String USER_ENDPOINTS = "/api/user/**";
     private static final String ADMIN_ENDPOINTS = "/api/admin/**";
+    private static final String PERMIT_ALL = "/api/**";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
@@ -47,12 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/car/all")
-                .permitAll()
+                .antMatchers(USER_ENDPOINTS)
+                .authenticated()
                 .antMatchers(ADMIN_ENDPOINTS)
                 .hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
+                .antMatchers(PERMIT_ALL)
+                .permitAll()
                 .and().httpBasic()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

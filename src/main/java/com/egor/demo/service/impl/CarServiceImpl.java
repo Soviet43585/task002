@@ -35,9 +35,28 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public Page<CarResponse> getAllAndSortByType(Pageable pageable) {
+        List<CarResponse> list = new ArrayList<>();
+        list = carRepository.findByOrderByTypeAsc(pageable).stream().map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        return new PageImpl<>(list);
+    }
+
+    @Override
+    public Page<CarResponse> getAllAndSortByPrice(Pageable pageable) {
+        return new PageImpl<>(carRepository.findByOrderByPriceAsc(pageable).stream().map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList()));
+    }
+
+    @Override
     public Page<CarResponse> getAllByUserId(Long id, Pageable pageable) {
         List<CarResponse> list = new ArrayList<>();
         list = carRepository.findAllByUserId(id, pageable).stream().map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        return new PageImpl<>(list);
+    }
+
+    @Override
+    public Page<CarResponse> getAllByType(String type, Pageable pageable) {
+        List<CarResponse> list = new ArrayList<>();
+        list = carRepository.findAllByType(type, pageable).stream().map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
         return new PageImpl<>(list);
     }
 
@@ -52,6 +71,7 @@ public class CarServiceImpl implements CarService {
     public void create(UserPrincipal userPrincipal, CreateCarRequest createCarRequest) {
         Car newCar = carDtoToEntityMapper.carDtoToEntity(createCarRequest);
         newCar.setUserId(userPrincipal.getId());
+        newCar.setActive(true);
         carRepository.save(newCar);
     }
 
@@ -92,4 +112,6 @@ public class CarServiceImpl implements CarService {
     public Boolean isUserOwner(List<Car> cars, Long id) {
         return cars.stream().anyMatch(s -> s.getId().equals(id));
     }
+
+
 }
