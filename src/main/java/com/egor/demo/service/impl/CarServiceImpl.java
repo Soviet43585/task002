@@ -2,6 +2,7 @@ package com.egor.demo.service.impl;
 
 
 import com.egor.demo.dto.request.CreateCarRequest;
+import com.egor.demo.dto.request.PriceFilterRequest;
 import com.egor.demo.dto.response.CarResponse;
 import com.egor.demo.dto.response.DetailCarResponse;
 import com.egor.demo.mapper.CarDtoToEntityMapper;
@@ -32,6 +33,19 @@ public class CarServiceImpl implements CarService {
     public DetailCarResponse getCarById(Long id) {
         Car car = carRepository.getById(id);
         return detailCarMapper.carEntityToDetailDto(car);
+    }
+
+    @Override
+    public Page<CarResponse> getAllByPrice(PriceFilterRequest priceFilterRequest, Pageable pageable) {
+        List<CarResponse> list = new ArrayList<>();
+        if (priceFilterRequest.getMin() == null && priceFilterRequest.getMax() != null) {
+            list = carRepository.findAll(pageable).stream().filter((p) -> p.getPrice() <= priceFilterRequest.getMax()).map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        } else if (priceFilterRequest.getMin() != null && priceFilterRequest.getMax() == null) {
+            list = carRepository.findAll(pageable).stream().filter((p) -> p.getPrice() >= priceFilterRequest.getMin()).map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        } else if (priceFilterRequest.getMin() != null && priceFilterRequest.getMax() != null) {
+            list = carRepository.findAll(pageable).stream().filter((p) -> p.getPrice() >= priceFilterRequest.getMin() && p.getPrice() <= priceFilterRequest.getMax()).map(carDtoToEntityMapper::carEntityToDto).collect(Collectors.toList());
+        }
+        return new PageImpl<>(list);
     }
 
     @Override

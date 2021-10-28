@@ -1,6 +1,7 @@
 package com.egor.demo.service;
 
 import com.egor.demo.dto.request.CreateCarRequest;
+import com.egor.demo.dto.request.PriceFilterRequest;
 import com.egor.demo.dto.response.CarResponse;
 import com.egor.demo.dto.response.DetailCarResponse;
 import com.egor.demo.model.Car;
@@ -13,6 +14,8 @@ import java.util.List;
 public interface CarService {
 
     DetailCarResponse getCarById(Long id);
+
+    Page<CarResponse> getAllByPrice(PriceFilterRequest priceFilterRequest, Pageable pageable);
 
     Page<CarResponse> getAllAndSortByType(Pageable pageable);
 

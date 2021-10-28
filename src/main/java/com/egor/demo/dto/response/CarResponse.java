@@ -8,7 +8,7 @@ public class CarResponse {
 
     private String type;
 
-    private String price;
+    private Double price;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class CarResponse {
         this.type = type;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

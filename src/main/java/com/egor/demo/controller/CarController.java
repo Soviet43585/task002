@@ -1,6 +1,7 @@
 package com.egor.demo.controller;
 
 import com.egor.demo.dto.request.CreateCarRequest;
+import com.egor.demo.dto.request.PriceFilterRequest;
 import com.egor.demo.dto.response.CarResponse;
 import com.egor.demo.dto.response.DetailCarResponse;
 import com.egor.demo.security.UserPrincipal;
@@ -43,6 +44,10 @@ public class CarController {
         return carService.getAllByType(type, pageable);
     }
 
+    @GetMapping("/car/filter/byPrice")
+    public Page<CarResponse> filterByType(@RequestBody PriceFilterRequest priceFilterRequest, Pageable pageable) {
+        return carService.getAllByPrice(priceFilterRequest, pageable);
+    }
 
     @GetMapping("/user/mySales")
     public Page<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user, Pageable pageable) {
