@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "f777890c-9748-49ad-b6ac-b9518bc39585",
-		"name": "task002",
+		"_postman_id": "96e06a37-bf00-4ba7-aa82-adc249ca48e0",
+		"name": "New Collection Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -43,6 +43,40 @@
 			"response": []
 		},
 		{
+			"name": "filterByPrice",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"min\" : \"10000\",\r\n    \"max\" : \"50000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/car/filter/byPrice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"car",
+						"filter",
+						"byPrice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "getAll",
 			"request": {
 				"method": "GET",
@@ -68,7 +102,9 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -77,16 +113,46 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "getAllMyCars",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "http://localhost:8080/api/car/service/getMyCars",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"car",
+						"service",
+						"getMyCars"
+					]
+				}
 			},
 			"response": []
 		},
@@ -120,7 +186,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user",
+					"raw": "http://localhost:8080/api/car/service/add",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -128,7 +194,9 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user"
+						"car",
+						"service",
+						"add"
 					]
 				}
 			},
@@ -142,12 +210,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "user",
+							"value": "admin",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "user",
+							"value": "admin",
 							"type": "string"
 						}
 					]
@@ -164,7 +232,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user/13",
+					"raw": "http://localhost:8080/api/car/service/update/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -172,8 +240,10 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
-						"13"
+						"car",
+						"service",
+						"update",
+						"1"
 					]
 				}
 			},
@@ -187,12 +257,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "user",
+							"value": "admin",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "user",
+							"value": "admin",
 							"type": "string"
 						}
 					]
@@ -200,7 +270,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/user/1",
+					"raw": "http://localhost:8080/api/car/service/delete/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -208,7 +278,9 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"car",
+						"service",
+						"delete",
 						"1"
 					]
 				}
@@ -322,15 +394,6 @@
 						"setRole"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "filterByPrice",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": null
 			},
 			"response": []
 		}

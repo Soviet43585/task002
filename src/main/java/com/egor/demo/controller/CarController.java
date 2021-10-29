@@ -52,22 +52,22 @@ public class CarController {
         return carService.getAllByPrice(priceFilterRequest, pageable);
     }
 
-    @GetMapping("/user/mySales")
+    @GetMapping("/car/service/getMyCars")
     public Page<CarResponse> getMyCars(@AuthenticationPrincipal UserPrincipal user, Pageable pageable) {
         return carService.getAllByUserId(user.getId(), pageable);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/car/service/add")
     public String add(@AuthenticationPrincipal UserPrincipal user, @Valid @RequestBody CreateCarRequest createCarRequest, BindingResult bindingResult) {
         return carService.create(user, createCarRequest, bindingResult);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/car/service/update/{id}")
     public String update(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id,@Valid @RequestBody CreateCarRequest createCarRequest, BindingResult bindingResult) {
         return carService.update(user, id, createCarRequest, bindingResult);
     }
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/car/service/delete/{id}")
     public void delete(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id) {
         carService.delete(user, id);
     }
